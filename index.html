@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Майк Вазовски | Корпорация Монстров</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --purple: #7B2FBE;
+            --purple-light: #9B59B6;
+            --purple-dark: #4A148C;
+            --text-dark: #1A1A2E;
+            --text-gray: #555555;
+            --text-light: #777777;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --max-width: 1000px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: var(--font-body);
+            font-weight: 300;
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding: 40px 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== БОКОВЫЕ ФОТО (ДЕКОРАТИВНЫЕ) ===== */
+        .side-image {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 1;
+            z-index: 0;
+            pointer-events: none;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .side-image.left {
+            left: -150px;
+        }
+
+        .side-image.right {
+            right: -150px;
+        }
+
+        /* Контейнер с контентом — поверх декора */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== РАЗДЕЛИТЕЛИ ===== */
+        .divider {
+            border: none;
+            border-top: 2px solid var(--purple);
+            margin: 45px 0;
+            opacity: 0.25;
+        }
+
+        .divider-light {
+            border: none;
+            border-top: 1px solid #E8E8E8;
+            margin: 45px 0;
+        }
+
+        /* ===== БЛОК 1: ШАПКА ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 18px;
+            border-bottom: 2px solid var(--purple);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--purple);
+            letter-spacing: 1.5px;
+        }
+
+        .scream {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== БЛОК 2: ГЕРОЙ ===== */
+        .hero {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            padding: 15px 0 5px;
+        }
+
+        .avatar {
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 3px solid var(--purple-light);
+        }
+
+        .info h1 {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 2.6rem;
+            color: var(--purple);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .info .subtitle {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--purple-light);
+            margin-bottom: 14px;
+        }
+
+        .info .desc {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-dark);
+            max-width: 520px;
+        }
+
+        /* ===== БЛОК 3,4,5: ОБЩИЙ СТИЛЬ ===== */
+        .section {
+            padding: 5px 0;
+        }
+
+        .section h2 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--purple);
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .section p {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-dark);
+            max-width: 820px;
+        }
+
+        /* ===== БЛОК 4: РАБОТА (СПИСОК) ===== */
+        .work-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 14px;
+        }
+
+        .work-list li {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--text-dark);
+            padding: 5px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .work-list li::before {
+            content: "◆";
+            color: var(--purple);
+            position: absolute;
+            left: 0;
+            font-size: 0.7rem;
+            top: 7px;
+        }
+
+        /* ===== БЛОК 5: ДРУГ ===== */
+        .friend-grid {
+            display: flex;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .friend-grid .text {
+            flex: 1;
+        }
+
+        .friend-grid .photo {
+            flex-shrink: 0;
+        }
+
+        .friend-grid .photo img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 3px solid var(--purple-light);
+        }
+
+        /* ===== БЛОК 6: ФУТЕР ===== */
+        .footer {
+            border-top: 2px solid var(--purple);
+            padding-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer .contacts {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .footer .contacts a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .footer .contacts a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .copy {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1200px) {
+            .side-image {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 25px 15px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 28px;
+            }
+
+            .info .desc {
+                max-width: 100%;
+            }
+
+            .friend-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .friend-grid .photo img {
+                width: 170px;
+                height: 170px;
+            }
+
+            .avatar img {
+                width: 190px;
+                height: 190px;
+            }
+
+            .info h1 {
+                font-size: 2.1rem;
+            }
+
+            .info .subtitle {
+                font-size: 1.05rem;
+            }
+
+            .section h2 {
+                font-size: 1.4rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .divider,
+            .divider-light {
+                margin: 32px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 18px 10px;
+            }
+
+            .avatar img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .info h1 {
+                font-size: 1.6rem;
+            }
+
+            .info .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .info .desc {
+                font-size: 0.88rem;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+
+            .section p {
+                font-size: 0.88rem;
+            }
+
+            .work-list li {
+                font-size: 0.88rem;
+                padding-left: 24px;
+            }
+
+            .friend-grid .photo img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .footer .contacts {
+                font-size: 0.78rem;
+            }
+
+            .footer .copy {
+                font-size: 0.65rem;
+            }
+
+            .divider,
+            .divider-light {
+                margin: 25px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== БОКОВЫЕ ФОТО (ДЕКОРАТИВНЫЕ) ===== -->
+    <img class="side-image left" src="salli.jpg" alt="Салливан">
+    <img class="side-image right" src="images.jpg" alt="Майк Вазовски">
+
+    <div class="container">
+
+        <!-- ===== БЛОК 1: ШАПКА ===== -->
+        <header class="header">
+            <div class="logo">MIKE WAZOWSKI</div>
+            <div class="scream">Уровень крика: 100%</div>
+        </header>
+
+        <!-- ===== БЛОК 2: ГЕРОЙ ===== -->
+        <section class="hero">
+            <div class="avatar">
+                <img src="images.jpg" alt="Майк Вазовски">
+            </div>
+            <div class="info">
+                <h1>МАЙК ВАЗОВСКИ</h1>
+                <div class="subtitle">Главный стратег отдела страха</div>
+                <p class="desc">
+                    Я не страшный, я — эффективный. Повышаю уровень крика
+                    на 200% без единой страшилки. Лучший друг Салливана
+                    и просто зелёный шарик с характером.
+                </p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ===== БЛОК 3: О МАЙКЕ ===== -->
+        <section class="section">
+            <h2>О Майке</h2>
+            <p>
+                Майк Вазовски — один из самых талантливых и целеустремлённых
+                монстров в Корпорации. Несмотря на свой небольшой рост и
+                отсутствие традиционных "страшных" качеств, он компенсирует
+                это невероятным умом, оптимизмом и харизмой. Майк всегда
+                верит в себя и доказывает, что успех зависит не от внешности,
+                а от упорства и правильного подхода. Его чувство юмора и
+                позитивный настрой вдохновляют всю команду.
+            </p>
+        </section>
+
+        <hr class="divider-light">
+
+        <!-- ===== БЛОК 4: РАБОТА ===== -->
+        <section class="section">
+            <h2>Работа в Корпорации Монстров</h2>
+            <p>
+                В Корпорации «Монстры, Инк.» Майк отвечает за стратегическое
+                планирование и повышение эффективности сбора криков. Он
+                разрабатывает методики обучения, анализирует показатели
+                и всегда ищет новые подходы к работе. Его главные достижения:
+            </p>
+            <ul class="work-list">
+                <li>Разработка новой системы обучения монстров-пугателей</li>
+                <li>Повышение производительности отдела страха на 40%</li>
+                <li>Внедрение инновационных методов сбора энергии</li>
+                <li>Создание комфортной атмосферы в коллективе</li>
+            </ul>
+        </section>
+
+        <hr class="divider-light">
+
+        <!-- ===== БЛОК 5: ЛУЧШИЙ ДРУГ ===== -->
+        <section class="section">
+            <h2>Лучший друг — Салливан</h2>
+            <div class="friend-grid">
+                <div class="text">
+                    <p>
+                        Джеймс П. Салливан (или просто Салли) — лучший друг
+                        и напарник Майка. Они познакомились ещё в университете
+                        и с тех пор неразлучны. Салли — огромный, мохнатый
+                        монстр, который пугает лучше всех, а Майк — его
+                        мозговой центр. Вместе они составляют идеальную
+                        команду: один воплощает силу и мощь, другой — ум
+                        и стратегию. Их дружба — главный секрет успеха
+                        Корпорации.
+                    </p>
+                </div>
+                <div class="photo">
+                    <img src="salli.jpg" alt="Салливан">
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ===== БЛОК 6: ФУТЕР ===== -->
+        <footer class="footer">
+            <div class="contacts">
+                <a href="#">mike@monsters.inc</a>
+                &nbsp;·&nbsp;
+                <a href="#">+1 (800) 555-SCREAM</a>
+                &nbsp;·&nbsp;
+                <span>Монстрополис, этаж 3</span>
+            </div>
+            <div class="copy">Корпорация Монстров © 2026</div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
