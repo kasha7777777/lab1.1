@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Майк Вазовски | Корпорация Монстров</title>
+    <!-- Подключение шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS-переменные для цветов */
+        :root {
+            --bg-primary: #1A1A2E;
+            --bg-secondary: #0F0C1F;
+            --green: #6BFF6B;
+            --purple: #B06AFF;
+            --red: #FF6B6B;
+            --text-light: #FFFFFF;
+            --text-muted: #AAAAAA;
+            --font-display: 'Press Start 2P', cursive;
+            --font-body: 'Roboto', sans-serif;
+            --glow-green: 0 0 30px rgba(107, 255, 107, 0.3);
+            --glow-purple: 0 0 30px rgba(176, 106, 255, 0.3);
+            --border-radius: 20px;
+        }
+
+        /* Сброс стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, var(--bg-primary), var(--bg-secondary));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: var(--font-body);
+            color: var(--text-light);
+        }
+
+        /* Основная карточка */
+        .card {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--bg-primary);
+            border: 3px solid var(--green);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--glow-green), inset 0 0 30px rgba(107, 255, 107, 0.05);
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px dashed var(--purple);
+            padding-bottom: 18px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--green);
+            text-shadow: 3px 3px 0 #1F5E1F;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--purple);
+            text-shadow: 3px 3px 0 #3A1F5E;
+        }
+
+        .scream-meter {
+            background: #1F1F3A;
+            padding: 10px 22px;
+            border-radius: 40px;
+            border: 2px solid var(--red);
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ===== ГЛАВНЫЙ БЛОК ===== */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        /* Аватар */
+        .avatar {
+            flex: 1 1 200px;
+            text-align: center;
+            background: radial-gradient(circle at 30% 30%, #4CAF50, #1B5E20);
+            border-radius: 50% 50% 50% 0;
+            padding: 35px 25px;
+            border: 5px solid var(--green);
+            box-shadow: var(--glow-green);
+            min-width: 150px;
+        }
+
+        .avatar .eye {
+            font-size: 6rem;
+            line-height: 1;
+            display: block;
+        }
+
+        .avatar .mouth {
+            font-size: 2.8rem;
+            display: block;
+            margin-top: -10px;
+        }
+
+        .avatar .badge {
+            background: var(--red);
+            color: #fff;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 12px;
+            border: 2px solid #fff;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Информация */
+        .info {
+            flex: 2 1 280px;
+        }
+
+        .info h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--green);
+            text-shadow: 4px 4px 0 #1F5E1F;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .info .subtitle {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .info .description {
+            font-size: 1rem;
+            line-height: 1.7;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 18px 22px;
+            border-radius: 15px;
+            border-left: 5px solid var(--green);
+            margin-bottom: 20px;
+            color: #DDDDDD;
+        }
+
+        .info .description i {
+            font-style: normal;
+            color: #FFD93D;
+        }
+
+        /* Навыки (теги) */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .skills .tag {
+            background: #1F1F3A;
+            padding: 7px 20px;
+            border-radius: 40px;
+            border: 2px solid var(--purple);
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skills .tag.green {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        /* ===== СЕКЦИЯ "О КОМПАНИИ" ===== */
+        .about {
+            margin: 35px 0 30px;
+            padding: 20px 25px;
+            background: rgba(176, 106, 255, 0.08);
+            border: 2px solid rgba(176, 106, 255, 0.25);
+            border-radius: 15px;
+        }
+
+        .about h2 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--purple);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .about p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #CCCCCC;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 3px dashed var(--purple);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer .contacts {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer .contacts a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0 5px;
+            border-bottom: 2px dotted transparent;
+        }
+
+        .footer .contacts .separator {
+            color: var(--purple);
+            margin: 0 8px;
+        }
+
+        .footer .contacts .location {
+            color: var(--purple);
+        }
+
+        .footer .copy {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            color: #555555;
+            letter-spacing: 1px;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 768px) {
+            .card {
+                padding: 25px 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .scream-meter {
+                font-size: 0.7rem;
+                padding: 6px 16px;
+            }
+
+            .info h1 {
+                font-size: 1.6rem;
+            }
+
+            .info .subtitle {
+                font-size: 1rem;
+            }
+
+            .avatar {
+                flex: 1 1 100%;
+                padding: 25px 15px;
+            }
+
+            .avatar .eye {
+                font-size: 4.5rem;
+            }
+
+            .avatar .mouth {
+                font-size: 2rem;
+            }
+
+            .hero {
+                gap: 25px;
+            }
+
+            .about h2 {
+                font-size: 0.8rem;
+            }
+
+            .about p {
+                font-size: 0.85rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .footer .contacts {
+                font-size: 0.8rem;
+            }
+
+            .footer .contacts .separator {
+                display: none;
+            }
+
+            .footer .contacts a {
+                display: inline-block;
+                margin: 3px 0;
+            }
+
+            .footer .copy {
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 18px 14px;
+                border-width: 2px;
+            }
+
+            .info h1 {
+                font-size: 1.3rem;
+            }
+
+            .info .description {
+                font-size: 0.85rem;
+                padding: 14px 16px;
+            }
+
+            .skills .tag {
+                font-size: 0.65rem;
+                padding: 5px 14px;
+            }
+
+            .about {
+                padding: 15px 18px;
+            }
+
+            .about p {
+                font-size: 0.8rem;
+            }
+
+            .avatar .eye {
+                font-size: 3.5rem;
+            }
+
+            .avatar .mouth {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <!-- ===== ШАПКА ===== -->
+        <header class="header">
+            <div class="logo">👻 <span>MIKE</span> WAZOWSKI</div>
+            <div class="scream-meter">🔊 Уровень крика: 100%</div>
+        </header>
+
+        <!-- ===== ГЛАВНЫЙ БЛОК ===== -->
+        <section class="hero">
+            <!-- Аватар -->
+            <div class="avatar">
+                <span class="eye">👁️</span>
+                <span class="mouth">🫦</span>
+                <div class="badge">⭐ Главный стратег</div>
+            </div>
+
+            <!-- Информация -->
+            <div class="info">
+                <h1>МАЙК ВАЗОВСКИ</h1>
+                <div class="subtitle">💼 Главный стратег отдела страха</div>
+                <div class="description">
+                    <i>🧠</i> Я не страшный, я — эффективный! 
+                    Повышаю уровень крика на 200% без единой страшилки. 
+                    Лучший друг Салливана и просто зелёный шарик с характером.
+                </div>
+
+                <!-- Навыки -->
+                <div class="skills">
+                    <span class="tag green">🔥 Крико-менеджмент</span>
+                    <span class="tag">📊 Стратегия страха</span>
+                    <span class="tag green">🤝 Командная работа</span>
+                    <span class="tag">🏆 Лидерство</span>
+                    <span class="tag green">🎯 Точность</span>
+                    <span class="tag">⚡ Креативность</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== СЕКЦИЯ "О КОМПАНИИ" ===== -->
+        <section class="about">
+            <h2>🏢 О КОРПОРАЦИИ МОНСТРОВ</h2>
+            <p>
+                Корпорация «Монстры, Инк.» — лидер в сфере производства энергии 
+                из детских криков. Мы верим, что страх может быть добрым, 
+                а работа — весёлой! Наша команда профессионалов делает мир 
+                ярче (и громче) каждый день.
+            </p>
+        </section>
+
+        <!-- ===== ФУТЕР ===== -->
+        <footer class="footer">
+            <div class="contacts">
+                📧 <a href="#">mike@monsters.inc</a>
+                <span class="separator">|</span>
+                📞 <a href="#">+1 (800) 555-SCREAM</a>
+                <span class="separator">|</span>
+                <span class="location">📍 Монстрополис, этаж 3</span>
+            </div>
+            <div class="copy">
+                🧪 Корпорация Монстров © 2026
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
